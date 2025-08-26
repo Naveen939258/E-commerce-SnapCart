@@ -30,7 +30,7 @@ const UserProfile = () => {
   useEffect(() => {
     if (token) {
       axios
-        .get("http://localhost:2005/getuser", {
+        .get("https://e-commerce-snapcart.onrender.com/getuser", {
           headers: { "auth-token": token },
         })
         .then((res) => {
@@ -51,7 +51,7 @@ const UserProfile = () => {
   useEffect(() => {
     if (token) {
       axios
-        .get("http://localhost:2005/orders/me", {
+        .get("https://e-commerce-snapcart.onrender.com/orders/me", {
           headers: { "auth-token": token },
         })
         .then((res) => {
@@ -64,7 +64,7 @@ const UserProfile = () => {
   // Fetch addresses
   const fetchAddresses = async () => {
     try {
-      const res = await fetch("http://localhost:2005/address/list", {
+      const res = await fetch("https://e-commerce-snapcart.onrender.com/address/list", {
         headers: { "auth-token": token },
       });
       const data = await res.json();
@@ -82,8 +82,8 @@ const UserProfile = () => {
   const handleSaveAddress = async (address) => {
     try {
       const url = editingAddress
-        ? `http://localhost:2005/address/update/${editingAddress._id}`
-        : `http://localhost:2005/address/add`;
+        ? `https://e-commerce-snapcart.onrender.com/address/update/${editingAddress._id}`
+        : `https://e-commerce-snapcart.onrender.com/address/add`;
       const method = editingAddress ? "PUT" : "POST";
 
       const res = await fetch(url, {
@@ -109,7 +109,7 @@ const UserProfile = () => {
   // Delete address
   const handleDeleteAddress = async (id) => {
     try {
-      const res = await fetch(`http://localhost:2005/address/delete/${id}`, {
+      const res = await fetch(`https://e-commerce-snapcart.onrender.com/address/delete/${id}`, {
         method: "DELETE",
         headers: { "auth-token": token },
       });
