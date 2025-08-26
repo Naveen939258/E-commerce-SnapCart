@@ -1,0 +1,240 @@
+/* =============================
+   🌟 Container
+============================= */
+.list-product {
+  width: 90%;
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #f9fbfd; /* softer light background */
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.list-product h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #222;
+  text-align: center;
+}
+
+/* =============================
+   🏷 Header Row (Desktop)
+============================= */
+.listproduct-format-main {
+  display: grid;
+  grid-template-columns: 100px 1fr 150px 150px 120px 120px 160px; /* added 150px for Brand */
+  align-items: center;
+  font-weight: bold;
+  font-size: 14px;
+  color: #444;
+  padding: 14px 0;
+  border-bottom: 2px solid #e5e9f0;
+}
+
+/* Product rows */
+.listproduct-format {
+  display: grid;
+  grid-template-columns: 100px 1fr 150px 150px 120px 120px 160px; /* same here */
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  color: #333;
+  transition: background 0.2s ease-in-out;
+}
+.listproduct-format:nth-child(even) {
+  background: #ffffff;
+}
+
+.listproduct-format:nth-child(odd) {
+  background: #f0f1f0;
+}
+
+.listproduct-format:hover {
+  background: #eef6ff; /* soft blue hover */
+}
+
+/* =============================
+   🖼 Product Image
+============================= */
+.listproduct-product-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* =============================
+   💲 Price Formatting
+============================= */
+.listproduct-format p {
+  margin: 0;
+}
+
+.listproduct-format p.old-price {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.listproduct-format p.new-price {
+  font-weight: bold;
+  color: #2abb4c;
+}
+
+/* =============================
+   ❌ Remove Icon
+============================= */
+.listproduct-remove-icon {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  justify-self: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.listproduct-remove-icon:hover {
+  transform: scale(1.2);
+  opacity: 0.7;
+}
+
+/* =============================
+   ✏️ Update / Save / Cancel Buttons
+============================= */
+.listproduct-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* --- Base Button --- */
+.listproduct-update-btn {
+  background: #007bff;
+  color: #fff;
+  padding: 6px 6px;   /* smaller padding */
+  font-size: 12px;    /* slightly smaller text */
+}
+
+.listproduct-save-btn,
+.listproduct-cancel-btn {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+/* --- Update Button --- */
+.listproduct-update-btn {
+  background: #007bff;
+  color: #fff;
+}
+
+.listproduct-update-btn:hover {
+  background: #0056b3;
+}
+
+/* --- Save Button --- */
+.listproduct-save-btn {
+  background: #28a745;
+  color: #fff;
+}
+
+.listproduct-save-btn:hover {
+  background: #1e7e34;
+}
+
+/* --- Cancel Button --- */
+.listproduct-cancel-btn {
+  background: #dc3545;
+  color: #fff;
+}
+
+.listproduct-cancel-btn:hover {
+  background: #a71d2a;
+}
+
+/* =============================
+   📝 Editable Input Fields
+============================= */
+.listproduct-input {
+  width: 90%;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.listproduct-input:focus {
+  border: 1px solid #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}
+
+/* =============================
+   📱 Responsive Design
+============================= */
+
+/* Tablets (max-width: 992px) */
+@media (max-width: 992px) {
+  .listproduct-format-main,
+  .listproduct-format {
+    grid-template-columns:80px 1fr 100px 100px 100px 100px 140px;
+    font-size: 13px;
+  }
+
+  .listproduct-product-img {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* Mobiles (max-width: 768px) */
+@media (max-width: 768px) {
+  .listproduct-format-main {
+    display: none; /* hide table header */
+  }
+
+  .listproduct-format {
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: auto auto auto;
+    row-gap: 8px;
+    padding: 15px;
+  }
+
+  .listproduct-product-img {
+    grid-row: span 3;
+  }
+
+  .listproduct-actions {
+    justify-content: flex-start;
+  }
+}
+
+/* Small Mobiles (max-width: 480px) */
+@media (max-width: 480px) {
+  .list-product {
+    padding: 10px;
+  }
+
+  .listproduct-format {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .listproduct-product-img,
+  .listproduct-remove-icon {
+    margin: 0 auto;
+  }
+
+  .listproduct-actions {
+    justify-content: center;
+  }
+}

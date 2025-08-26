@@ -1,0 +1,108 @@
+.admin {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Content area beside sidebar */
+.admin-content {
+  margin-left: 220px; /* equal to sidebar width (desktop) */
+  padding: 20px;
+  width: calc(100% - 220px);
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+/* Welcome section */
+.welcome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical center */
+  align-items: center;     /* horizontal center */
+  height: 25%;             /* responsive height */
+  text-align: center;
+}
+
+.welcome h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.welcome p {
+  font-size: 16px;
+  color: #555;
+}
+
+/* ===============================
+   Responsive Design
+================================*/
+
+/* Large tablets & small laptops */
+@media (max-width: 1200px) {
+  .admin-content {
+    margin-left: 200px; /* slightly smaller sidebar */
+    width: calc(100% - 200px);
+  }
+  .welcome h1 {
+    font-size: 26px;
+  }
+  .welcome p {
+    font-size: 15px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+  .admin-content {
+    margin-left: 160px; /* sidebar shrinks */
+    width: calc(100% - 160px);
+  }
+  .welcome h1 {
+    font-size: 24px;
+  }
+  .welcome p {
+    font-size: 14px;
+  }
+}
+
+/* Mobile landscape */
+@media (max-width: 768px) {
+  .admin-content {
+    margin-left: 80px; /* collapsed sidebar (icons only) */
+    width: calc(100% - 80px);
+  }
+  .welcome {
+    height: auto;
+    padding: 20px;
+  }
+  .welcome h1 {
+    font-size: 22px;
+  }
+  .welcome p {
+    font-size: 13px;
+  }
+}
+
+/* Small mobile (portrait) */
+@media (max-width: 480px) {
+  .admin {
+    flex-direction: column; /* stack sidebar and content */
+  }
+  .admin-content {
+    margin-left: 0;
+    width: 100%;
+    margin-top: 60px; /* space if navbar is fixed */
+  }
+  .welcome {
+    height: auto;
+    padding: 20px;
+  }
+  .welcome h1 {
+    font-size: 20px;
+  }
+  .welcome p {
+    font-size: 12px;
+  }
+}

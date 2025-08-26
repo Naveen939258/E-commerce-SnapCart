@@ -1,0 +1,84 @@
+/* Navbar.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Logo */
+.nav-logo {
+  height: 45px;     /* Increase visible size */
+  width: auto;
+  object-fit: contain;  /* Keeps proportions */
+  display: block;
+}
+
+
+/* Profile Image */
+.nav-profile {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover; 
+  object-position: center top; /* 👈 Shifts the image down slightly */
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  display: block;
+}
+
+
+.nav-profile:hover {
+  transform: scale(1.1);
+}
+
+/* -------- Responsive -------- */
+
+/* Tablet screens (max width 1024px) */
+@media (max-width: 1024px) {
+  .nav-logo {
+    height: 40px;
+  }
+
+  .nav-profile {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Mobile screens (max width 768px) */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+
+  .nav-logo {
+    height: 35px;
+  }
+
+  .nav-profile {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Extra small screens (max width 480px) */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 8px 15px;
+  }
+
+  .nav-logo {
+    height: 30px;
+  }
+
+  .nav-profile {
+    width: 30px;
+    height: 30px;
+  }
+}

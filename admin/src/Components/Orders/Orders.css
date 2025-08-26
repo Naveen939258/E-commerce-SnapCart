@@ -1,0 +1,156 @@
+/* Container */
+.admin-orders {
+  padding: 30px;
+  font-family: "Poppins", sans-serif;
+  background: #f4f6f8;
+  min-height: 100vh;
+}
+
+/* Table */
+.admin-orders table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.admin-orders th, .admin-orders td {
+  padding: 14px 18px;
+  text-align: left;
+}
+
+.admin-orders th {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: 600;
+}
+
+.admin-orders tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.admin-orders tr:hover {
+  background-color: #e2e8f0;
+}
+
+/* Buttons */
+.admin-orders button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.admin-orders button:hover {
+  background-color: #0056b3;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Order Details Modal */
+.order-details-modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  width: 600px;
+  max-width: 90%;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  animation: slideIn 0.3s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: #a71d2a;
+}
+
+/* Items List */
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 10px 0;
+}
+
+.item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-name {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.item-qty {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Status Update */
+.status-update {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.status-update select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-right: 12px;
+}
+
+.status-update button {
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
