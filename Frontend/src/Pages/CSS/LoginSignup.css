@@ -1,0 +1,134 @@
+.loginsignup {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fceabb, #f8b500, bisque);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Container */
+.loginsignup-container {
+  background: #fff;
+  width: 380px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: all 0.4s ease-in-out;
+  transform: scale(1);
+}
+
+/* Hover Effect */
+.loginsignup-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 12px 30px rgba(0, 115, 230, 0.4);
+  background: linear-gradient(135deg, #ffffff, #f9f9f9);
+}
+
+/* Heading */
+.loginsignup-container h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Input Fields */
+.loginsignup-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.loginsignup-fields input {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+.loginsignup-fields input:focus {
+  outline: none;
+  border-color: #0073e6;
+  box-shadow: 0 0 8px rgba(0, 115, 230, 0.5);
+  transform: scale(1.02);
+}
+
+/* Button */
+.loginsignup-container button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #0073e6, #005bb5);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.loginsignup-container button:hover {
+  background: linear-gradient(135deg, #005bb5, #003f7f);
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 15px rgba(0, 91, 181, 0.4);
+}
+
+/* Toggle between login/signup */
+.loginsignup-toggle {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #555;
+}
+
+.loginsignup-toggle span {
+  color: #0073e6;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: 0.3s;
+}
+
+.loginsignup-toggle span:hover {
+  text-decoration: underline;
+  color: #005bb5;
+}
+
+/* Checkbox with Terms */
+.loginsignup-terms {
+  margin-top: 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: #444;
+  text-align: left;
+}
+
+.loginsignup-terms input {
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.loginsignup-terms span {
+  color: #0073e6;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.loginsignup-terms span:hover {
+  text-decoration: underline;
+  color: #005bb5;
+}
+
+/* Responsive */
+@media (max-width: 450px) {
+  .loginsignup-container {
+    width: 90%;
+    padding: 20px;
+  }
+}

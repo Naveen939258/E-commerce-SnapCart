@@ -1,0 +1,301 @@
+.cartitems {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* =============================
+   Header Row (Desktop)
+============================= */
+.cartitems-format-main {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr 0.8fr 1fr 0.5fr;
+  align-items: center;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 0;
+  color: #444;
+}
+
+.cartitems hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 10px 0;
+}
+
+/* =============================
+   Each Cart Row
+============================= */
+.cartitems-format {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr 0.8fr 1fr 0.5fr;
+  align-items: center;
+  padding: 12px 0;
+  font-size: 15px;
+  color: #333;
+  transition: background 0.2s ease-in-out;
+}
+
+.cartitems-format:hover {
+  background: #fafafa;
+  border-radius: 8px;
+}
+
+/* Product Image */
+.carticon-product-icon {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  background: #fff;
+}
+
+/* Title */
+.cart-title {
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Price */
+.cartitems-price {
+  font-size: 15px;
+  color: #333;
+}
+
+/* Quantity */
+.cartitems-quantity {
+  width: 40px;
+  height: 32px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #faf8f8;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 0;
+  cursor: default;
+  color: #000;
+}
+
+/* Subtotal (desktop) */
+.cartitems-subtotal {
+  font-weight: 600;
+  color: #222;
+}
+
+/* Remove Icon */
+.cartitems-remove-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+.cartitems-remove-icon:hover {
+  transform: scale(1.2);
+}
+
+/* =============================
+   Totals Section
+============================= */
+.cartitems-down {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  gap: 30px;
+}
+
+.cartitems-total {
+  flex: 1;
+  min-width: 300px;
+  padding: 20px;
+  background: #fafafa;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.cartitems-total h1 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.cartitems-total-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  font-size: 16px;
+  color: #444;
+}
+
+.cartitems-total button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: #ff4d4d;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+.cartitems-total button:hover {
+  background: #e60023;
+}
+
+/* =============================
+   Promo Code Section
+============================= */
+.cartitems-promocode {
+  flex: 1;
+  min-width: 300px;
+  padding: 20px;
+  background: #fafafa;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+.cartitems-promocode p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 12px;
+}
+.cartitems-promobox {
+  display: flex;
+  gap: 10px;
+}
+.cartitems-promobox input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+.cartitems-promobox button {
+  padding: 10px 16px;
+  background: #333;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+.cartitems-promobox button:hover {
+  background: #000;
+}
+
+/* =============================
+   Responsive
+============================= */
+
+/* =============================
+   Tablet (≤ 900px)
+============================= */
+@media (max-width: 900px) {
+  /* Hide table header */
+  .cartitems-format-main {
+    display: none;
+  }
+
+  /* Use card layout for items */
+  .cartitems-format {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+
+  /* Image centered */
+  .carticon-product-icon {
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    margin: 0 auto 12px;
+    display: block;
+  }
+
+  /* Title full text */
+  .cart-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    white-space: normal;
+    overflow: visible;
+    text-align: center;
+  }
+
+  /* Price */
+  .cartitems-price {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  /* Quantity & remove in row */
+  .cart-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .cartitems-quantity {
+    width: 50px;
+    height: 34px;
+    font-size: 0.95rem;
+  }
+
+  .cartitems-remove-icon {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+  }
+
+  /* Arrange cards in 2-column grid for tablets */
+  .cartitems {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+/* =============================
+   Mobile (≤ 600px)
+============================= */
+@media (max-width: 600px) {
+  /* Single column cards */
+  .cartitems {
+    display: block;
+  }
+
+  .cartitems-format {
+    width: 100%;
+    margin: 0 0 15px 0;
+  }
+
+  .cart-title,
+  .cartitems-price {
+    text-align: left;
+  }
+
+  .cart-actions {
+    justify-content: flex-start;
+  }
+}
+

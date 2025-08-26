@@ -1,0 +1,471 @@
+/* =============================
+   Checkout Container
+============================= */
+.checkout-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+}
+
+.checkout-container h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* =============================
+   Sections Layout
+============================= */
+.checkout-sections {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* =============================
+   Shipping Address Section
+============================= */
+.checkout-address {
+  flex: 1;
+  min-width: 320px;
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.checkout-address h2 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.saved-addresses {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.address-card {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 15px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s all ease;
+  position: relative;
+}
+
+.address-card:hover {
+  border-color: #007bff;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+}
+
+.address-card.selected {
+  border-color: #007bff;
+  box-shadow: 0 2px 10px rgba(0, 123, 255, 0.25);
+}
+
+.address-card p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.default-tag {
+  background-color: #007bff;
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.address-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.address-actions button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s all ease;
+}
+
+.address-actions button:hover {
+  opacity: 0.85;
+}
+
+.address-actions button:first-child {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.address-actions button:last-child {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.add-new-btn {
+  margin-top: 15px;
+  padding: 6px 10px;      /* smaller padding */
+  font-size: 12px;        /* smaller font */
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s all ease;
+}
+
+.add-new-btn:hover {
+  background-color: #218838;
+}
+
+/* =============================
+   Address Form Styling
+============================= */
+.address-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.address-form input,
+.address-form select {
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.2s all ease;
+}
+
+.address-form input:focus,
+.address-form select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+.address-form label {
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: #555;
+}
+
+.address-form button {
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s all ease;
+}
+
+.address-form button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.address-form button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.address-form button[type="button"] {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.address-form button[type="button"]:hover {
+  background-color: #5a6268;
+}
+
+/* =============================
+   Order Summary (Premium Style)
+============================= */
+.checkout-summary {
+  flex: 1;
+  min-width: 320px;
+  background: #fafafa;
+  padding: 22px 24px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
+}
+
+.checkout-summary:hover {
+  transform: translateY(-2px);
+}
+
+.checkout-summary h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  color: #1c1c1c;
+}
+
+/* Line Items */
+.order-summary p {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.order-summary p strong {
+  font-weight: 600;
+  color: #111;
+}
+
+/* Discount line */
+.order-summary p.discount {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+/* Divider + Total */
+.order-summary hr {
+  border: none;
+  border-top: 1px dashed #ccc;
+  margin: 15px 0;
+}
+
+.order-summary h3 {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  margin-top: 10px;
+  padding-top: 8px;
+  font-weight: 700;
+  color: #000;
+}
+
+/* Promo Code Input */
+.promo-code {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0 5px 0;
+}
+
+.promo-code input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.promo-code input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.promo-code button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.promo-code button:hover {
+  background: #0056b3;
+}
+
+.promo-code button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+/* Savings Note */
+.savings-note {
+  font-size: 13px;
+  color: #2e7d32;
+  margin-top: 6px;
+  text-align: right;
+  font-weight: 500;
+}
+
+/* =============================
+   Payment Section (Improved)
+============================= */
+.payment-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  font-family: "Arial", sans-serif;
+}
+
+.payment-container h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.payment-address,
+.payment-cart-summary {
+  margin-bottom: 25px;
+  padding: 15px 18px;
+  background: #fafafa;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.payment-address p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.payment-address strong {
+  color: #333;
+}
+
+.payment-cart-summary h4 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  color: #222;
+}
+
+.payment-cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.cart-item-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item-line:last-child {
+  border-bottom: none;
+}
+
+.ci-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.ci-left img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.ci-right {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+}
+
+.payment-cart-summary hr {
+  margin: 15px 0;
+  border: none;
+  border-top: 1px dashed #ccc;
+}
+
+.payment-cart-summary p {
+  font-size: 14px;
+  margin: 6px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.payment-cart-summary p strong {
+  font-weight: 600;
+  color: #000;
+}
+
+.payment-cart-summary small {
+  color: #777;
+  font-size: 12px;
+}
+
+/* PayPal Buttons */
+.payment-container .paypal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+
+/* =============================
+   Responsive
+============================= */
+@media (max-width: 768px) {
+  .checkout-sections {
+    flex-direction: column;
+  }
+
+  .checkout-address,
+  .checkout-summary {
+    width: 100%;
+  }
+
+  .saved-addresses {
+    gap: 12px;
+  }
+
+  .address-card {
+    padding: 12px 15px;
+  }
+
+  .address-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .address-actions button {
+    width: 100%;
+  }
+  .payment-container {
+    padding: 18px;
+    margin: 20px auto;
+  }
+
+  .ci-left img {
+    width: 40px;
+    height: 40px;
+  }
+}

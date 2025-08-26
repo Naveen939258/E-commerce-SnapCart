@@ -1,0 +1,101 @@
+/* =========================
+   Product Grid Container
+========================= */
+.item-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Desktop default */
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* =========================
+   Individual Product Item
+========================= */
+.item-pics {
+  padding: 15px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.item-pics:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Product Image */
+.item-pics img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  object-fit: cover;
+}
+
+/* Product Name */
+.item-name {
+  margin: 8px 0 4px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 🔥 Brand Name */
+.item-brand {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #0c0c0c;
+}
+
+/* Prices container */
+.item-prices {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+/* New Price */
+.item-price-new {
+  color: #e63946; /* Red highlight */
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Old Price */
+.item-price-old {
+  color: #888;
+  font-size: 16px;
+  text-decoration: line-through;
+}
+
+/* =========================
+   Responsive Layouts
+========================= */
+
+/* Tablet (≤ 900px) → 3 items per row */
+@media (max-width: 900px) {
+  .item-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Mobile (≤ 600px) → 2 items per row */
+@media (max-width: 600px) {
+  .item-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Extra Small (≤ 400px) → 1 item per row */
+@media (max-width: 400px) {
+  .item-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

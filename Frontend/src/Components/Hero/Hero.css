@@ -1,0 +1,147 @@
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;   /* ✅ keeps text & image level */
+  padding: 40px 80px;
+  min-height: 80vh;
+  gap: 40px; /* space between text & image */
+
+  /* ✨ Gradient background like your photo */
+  background: linear-gradient(135deg, #fff4e6 0%, #ffd6a5 40%, #ffcad4 100%);
+}
+
+/* ============================
+   Left Section
+============================ */
+.hero-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* ✅ vertically centers */
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.hero-left h2 {
+  font-size: 26px;
+  color: #ff4d4d;
+  font-weight: 700;
+  margin: 0;
+}
+
+.hero-left p {
+  font-size: 44px;
+  font-weight: 700;
+  margin: 0;
+  color: #333;
+  line-height: 1.5; /* ✅ tighter spacing */
+  text-align: left;
+}
+
+/* Hand Icon with "new" */
+.hero-hand-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-hand-icon p {
+  font-size: 44px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.hero-hand-icon img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Latest Collection Button */
+.hero-latest-btn {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background: #ff4d4d;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  text-decoration: none;
+  border: none;
+  width: auto;
+  max-width: fit-content;
+}
+
+.hero-latest-btn:hover {
+  background: #e60023;
+}
+
+.hero-latest-btn img {
+  width: 18px;
+  height: 18px;
+}
+
+/* ============================
+   Right Section
+============================ */
+.Hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* ✅ aligns with text */
+}
+
+.Hero-right img {
+  max-width: 620px; /* ⬆️ bigger image */
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  margin-top: 0; /* ✅ no drop */
+}
+
+/* ============================
+   Responsive Design
+============================ */
+@media (max-width: 992px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .hero-left {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-left p {
+    font-size: 34px;
+  }
+
+  .Hero-right img {
+    max-width: 360px; /* ⬆️ bigger than before */
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-left p {
+    font-size: 26px;
+  }
+
+  .Hero-right img {
+    max-width: 260px; /* ⬆️ slightly bigger */
+  }
+
+  .hero-latest-btn {
+    font-size: 15px;
+    padding: 8px 16px;
+  }
+}
