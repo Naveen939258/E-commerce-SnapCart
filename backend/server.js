@@ -21,7 +21,7 @@ const razorpay = new Razorpay({
 
 const app = express();
 const port =  process.env.PORT || 2005;
-
+const serverUrl = process.env.SERVER_URL || `http://localhost:${port}`;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -50,7 +50,7 @@ app.use("/images", express.static("upload/images"));
 
 app.post("/upload", upload.single("product"), (req, res) => {
   if (!req.file) return res.status(400).json({ success: 0, message: "No file uploaded" });
-  res.json({ success: 1, image_url: `http://localhost:${port}/images/${req.file.filename}` });
+  res.json({ success: 1, image_url: `${serverUrl}/images/${req.file.filename}` });
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
