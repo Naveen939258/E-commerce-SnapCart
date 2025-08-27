@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import AddressForm from "../Checkout/AddressForm"; // ✅ reuse existing form
+import AddressForm from "../Checkout/AddressForm";
 import "./UserProfile.css";
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
   const [editable, setEditable] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "" });
-  const [message, setMessage] = useState("");
   const [orders, setOrders] = useState([]);
-  const [selectedOrder, setSelectedOrder] = useState(null);
-
-  const [tab, setTab] = useState("orders"); // ✅ active tab
+  const [tab, setTab] = useState("orders");
   const [addresses, setAddresses] = useState([]);
   const [editingAddress, setEditingAddress] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [message, setMessage] = useState(""); // ✅ success/error message
 
   const token = localStorage.getItem("token");
 
@@ -47,6 +45,33 @@ const UserProfile = () => {
     }
   }, [token]);
 
+  // ✅ Save profile changes
+  const handleSaveProfile = async () => {
+    try {
+      const res = await fetch("https://e-commerce-snapcart.onrender.com/updateuser", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": token,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (data && data._id) {
+        setUser(data); // ✅ update profile state
+        setEditable(false);
+        setMessage("✅ Profile updated successfully!");
+      } else {
+        setMessage("❌ Failed to update profile.");
+      }
+    } catch (err) {
+      console.error("Error updating profile:", err);
+      setMessage("❌ Error updating profile.");
+    }
+  };
+
   // Fetch orders
   useEffect(() => {
     if (token) {
@@ -61,8 +86,8 @@ const UserProfile = () => {
     }
   }, [token]);
 
-  // Fetch addresses
-  const fetchAddresses = async () => {
+  // Fetch addresses (wrapped in useCallback to satisfy ESLint)
+  const fetchAddresses = useCallback(async () => {
     try {
       const res = await fetch("https://e-commerce-snapcart.onrender.com/address/list", {
         headers: { "auth-token": token },
@@ -72,11 +97,11 @@ const UserProfile = () => {
     } catch (err) {
       console.error("Failed to fetch addresses", err);
     }
-  };
+  }, [token]);
 
   useEffect(() => {
     if (tab === "addresses" && token) fetchAddresses();
-  }, [tab, token]);
+  }, [tab, token, fetchAddresses]);
 
   // Save address
   const handleSaveAddress = async (address) => {
@@ -109,10 +134,13 @@ const UserProfile = () => {
   // Delete address
   const handleDeleteAddress = async (id) => {
     try {
-      const res = await fetch(`https://e-commerce-snapcart.onrender.com/address/delete/${id}`, {
-        method: "DELETE",
-        headers: { "auth-token": token },
-      });
+      const res = await fetch(
+        `https://e-commerce-snapcart.onrender.com/address/delete/${id}`,
+        {
+          method: "DELETE",
+          headers: { "auth-token": token },
+        }
+      );
       const data = await res.json();
       if (data.success) fetchAddresses();
     } catch (err) {
@@ -136,7 +164,9 @@ const UserProfile = () => {
                 type="text"
                 name="name"
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
               />
             ) : (
               <p>{user.name}</p>
@@ -148,7 +178,9 @@ const UserProfile = () => {
                 type="email"
                 name="email"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
               />
             ) : (
               <p>{user.email}</p>
@@ -158,14 +190,17 @@ const UserProfile = () => {
 
         <div className="profile-actions">
           {editable ? (
-            <button className="save-btn">Save</button>
+            <button className="save-btn" onClick={handleSaveProfile}>
+              Save
+            </button>
           ) : (
             <button className="edit-btn" onClick={() => setEditable(true)}>
               Edit Profile
             </button>
           )}
         </div>
-        {message && <p className="profile-message">{message}</p>}
+
+        {message && <p className="update-message">{message}</p>}
       </div>
 
       {/* Tabs */}
@@ -205,23 +240,23 @@ const UserProfile = () => {
                   <tr key={o._id}>
                     <td>{o._id}</td>
                     <td>{new Date(o.createdAt).toLocaleDateString()}</td>
-                   <td>
-  <span
-    className={`status-badge ${
-      o.status.toLowerCase() === "delivered"
-        ? "status-delivered"
-        : o.status.toLowerCase() === "cancelled"
-        ? "status-cancelled"
-        : o.status.toLowerCase() === "paid"
-        ? "status-paid"
-        : o.status.toLowerCase() === "failed"
-        ? "status-failed"
-        : "status-shipped"
-    }`}
-  >
-    {o.status}
-  </span>
-</td>
+                    <td>
+                      <span
+                        className={`status-badge ${
+                          o.status.toLowerCase() === "delivered"
+                            ? "status-delivered"
+                            : o.status.toLowerCase() === "cancelled"
+                            ? "status-cancelled"
+                            : o.status.toLowerCase() === "paid"
+                            ? "status-paid"
+                            : o.status.toLowerCase() === "failed"
+                            ? "status-failed"
+                            : "status-shipped"
+                        }`}
+                      >
+                        {o.status}
+                      </span>
+                    </td>
                     <td>${o.total}</td>
                   </tr>
                 ))}
@@ -240,7 +275,8 @@ const UserProfile = () => {
               {addresses.map((addr) => (
                 <div key={addr._id} className="address-card">
                   <p>
-                    <strong>{addr.name}</strong> {addr.isDefault && "(Default)"}
+                    <strong>{addr.name}</strong>{" "}
+                    {addr.isDefault && "(Default)"}
                   </p>
                   <p>{addr.street}</p>
                   <p>

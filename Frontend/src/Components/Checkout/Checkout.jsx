@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import AddressForm from "./AddressForm";
 import OrderSummary from "./OrderSummary";
 import PaymentForm from "./PaymentForm";
@@ -10,7 +10,7 @@ const Checkout = () => {
 
   const [addresses, setAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
-  const [editingAddress, setEditingAddress] = useState(null); // ✅ track editing
+  const [editingAddress, setEditingAddress] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
   const [promoDiscount, setPromoDiscount] = useState(0);
@@ -20,8 +20,8 @@ const Checkout = () => {
 
   const getToken = () => localStorage.getItem("token") || "";
 
-  // Fetch addresses from backend
-  const fetchAddresses = async () => {
+  // ✅ Wrap in useCallback so it's stable across renders
+  const fetchAddresses = useCallback(async () => {
     setLoading(true);
     try {
       const token = getToken();
@@ -65,17 +65,16 @@ const Checkout = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []); // ✅ no state dependencies, safe to leave empty
 
-  // Initial fetch + login/logout listener
+  // ✅ Stable fetchAddresses dependency
   useEffect(() => {
     fetchAddresses();
     const onLoginChange = () => fetchAddresses();
     window.addEventListener("loginStatusChanged", onLoginChange);
     return () => window.removeEventListener("loginStatusChanged", onLoginChange);
-  }, []);
+  }, [fetchAddresses]);
 
-  // ✅ Save or update address
   const handleSaveAddress = async (address) => {
     try {
       const token = getToken();
@@ -104,7 +103,7 @@ const Checkout = () => {
         alert(editingAddress ? "Address updated!" : "Address added!");
         setEditingAddress(null);
         setShowForm(false);
-        fetchAddresses(); // ✅ refresh after save
+        fetchAddresses(); // ✅ now stable
       } else {
         alert(data?.message || "Failed to save address");
       }
@@ -114,7 +113,6 @@ const Checkout = () => {
     }
   };
 
-  // ✅ Delete address
   const handleDeleteAddress = async (id) => {
     try {
       const token = getToken();
@@ -125,15 +123,13 @@ const Checkout = () => {
 
       const res = await fetch(`https://e-commerce-snapcart.onrender.com/address/delete/${id}`, {
         method: "DELETE",
-        headers: {
-          "auth-token": token,
-        },
+        headers: { "auth-token": token },
       });
 
       const data = await res.json();
       if (data?.success) {
         alert("Address deleted!");
-        fetchAddresses(); // refresh list, backend auto-handles default
+        fetchAddresses();
       } else {
         alert(data?.message || "Failed to delete address");
       }
@@ -146,7 +142,6 @@ const Checkout = () => {
   return (
     <div className="checkout-container">
       <h1>Checkout</h1>
-
       <div className="checkout-sections">
         {/* Address Section */}
         <div className="checkout-address">
@@ -168,9 +163,7 @@ const Checkout = () => {
                     {addr.isDefault && <span className="default-tag">Default</span>}
                   </p>
                   <p>{addr.street}</p>
-                  <p>
-                    {addr.city}, {addr.state} - {addr.pincode}
-                  </p>
+                  <p>{addr.city}, {addr.state} - {addr.pincode}</p>
                   <p>{addr.phone}</p>
                   <div className="address-actions">
                     <button
@@ -201,7 +194,7 @@ const Checkout = () => {
           ) : (
             <AddressForm
               onSave={handleSaveAddress}
-              editingAddress={editingAddress} // ✅ match prop name in AddressForm.js
+              editingAddress={editingAddress}
               onCancel={() => {
                 setEditingAddress(null);
                 setShowForm(false);

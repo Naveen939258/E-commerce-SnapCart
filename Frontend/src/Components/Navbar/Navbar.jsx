@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react"; // ✅ added useCallback
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import logo from "../Assets/logo.png";
@@ -15,7 +15,7 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
   const [userName, setUserName] = useState("");
 
-  const fetchUserAndCart = async (token) => {
+  const fetchUserAndCart = useCallback(async (token) => { // ✅ wrap in useCallback
     try {
       const res = await fetch("https://e-commerce-snapcart.onrender.com/getuser", {
         headers: { "auth-token": token },
@@ -36,10 +36,9 @@ const Navbar = () => {
     } catch (err) {
       console.error(err);
     }
-  };
+  }, [setCartItems]); // ✅ add dependency
 
-  // Runs whenever token changes
-  const checkLoginStatus = () => {
+  const checkLoginStatus = useCallback(() => {
     const token = localStorage.getItem("token");
     if (token) {
       setIsLoggedIn(true);
@@ -49,25 +48,25 @@ const Navbar = () => {
       setUserName("");
       setCartItems({});
     }
-  };
+  }, [fetchUserAndCart, setCartItems]); // ✅ add dependencies
 
   // First load
   useEffect(() => {
     checkLoginStatus();
-  }, []);
+  }, [checkLoginStatus]);
 
-  // Listen for custom login/logout events
+  // Listen for login/logout events
   useEffect(() => {
     window.addEventListener("loginStatusChanged", checkLoginStatus);
     return () => window.removeEventListener("loginStatusChanged", checkLoginStatus);
-  }, []);
+  }, [checkLoginStatus]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     setUserName("");
     setCartItems({});
-    window.dispatchEvent(new Event("loginStatusChanged")); // 👈 notify others
+    window.dispatchEvent(new Event("loginStatusChanged"));
     navigate("/login");
   };
 
@@ -105,9 +104,9 @@ const Navbar = () => {
           {menu === "kids" && <hr />}
         </li>
         <li onClick={() => setMenu("search")}>
-    <Link to="/search">Search</Link>
-    {menu === "search" && <hr />}
-  </li>
+          <Link to="/search">Search</Link>
+          {menu === "search" && <hr />}
+        </li>
       </ul>
 
       <div className="nav-right">
@@ -157,10 +156,9 @@ const Navbar = () => {
             <li onClick={() => handleMenuClick("kids")}>
               <Link to="/kids">Kids</Link>
             </li>
-            <li onClick={() => setMenu("search")}>
-    <Link to="/search">Search</Link>
-    {menu === "search" && <hr />}
-  </li>
+            <li onClick={() => handleMenuClick("search")}>
+              <Link to="/search">Search</Link>
+            </li>
           </ul>
         )}
       </div>
