@@ -39,19 +39,39 @@ app.get("/", (_req, res) => res.send("🚀 Express App is Running"));
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Uploads
-const storage = multer.diskStorage({
-  destination: "./upload/images",
-  filename: (req, file, cb) =>
-    cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`),
+// ─────────────────────────────────────────────────────────────────────────────
+// CLOUDINARY UPLOADS
+const { v4: uuidv4 } = require("uuid");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-const upload = multer({ storage });
 
-app.use("/images", express.static("upload/images"));
+// Use Cloudinary for storage
+const cloudStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "products",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+    public_id: (req, file) => uuidv4(),
+  },
+});
 
+const upload = multer({ storage: cloudStorage });
+
+// Upload endpoint
 app.post("/upload", upload.single("product"), (req, res) => {
   if (!req.file) return res.status(400).json({ success: 0, message: "No file uploaded" });
-  res.json({ success: 1, image_url: `${serverUrl}/images/${req.file.filename}` });
+  res.json({ success: 1, image_url: req.file.path }); // Cloudinary gives a full URL
 });
+
+// Keep serving old images
+app.use("/images", express.static("upload/images"));
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Models
